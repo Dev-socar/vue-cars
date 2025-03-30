@@ -118,5 +118,19 @@ import CartSlide from "@/components/public/Cart/CartSlide.vue";
     </div>
     <a class="block w-max mt-10 mx-auto py-4 px-8 rounded-full bg-blue-600 hover:bg-black transition-colors ease-in duration-200 text-white text-lg text-center capitalize" href="#">Explore all avaible cars</a>
   </Section>
+
+ <Section class="w-[95%]">
+    <TitleSection
+      :spanText="'Expert Car Care'"
+      :headingText="'Reliable Service For Every Ride'"
+      :classes="'items-center'"
+    />
+
+
+    
+
+    </Section>
+
+
   <Footer />
 </template>
