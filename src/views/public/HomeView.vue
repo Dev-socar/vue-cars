@@ -1,15 +1,16 @@
 <script setup>
 import Header from "@/components/public/Header/Header.vue";
 import TitleSection from "@/components/public/UI/TitleSection.vue";
-import CartCard from "@/components/public/Cart/CartCard.vue";
-import CartBrandsCard from "@/components/public/Cart/CartBrandsCard.vue";
+import CarCard from "@/components/public/Car/CarCard.vue";
+import CarBrandsCard from "@/components/public/Car/CarBrandsCard.vue";
 import Footer from "@/components/public/Footer/Footer.vue";
 import FlechasSwiper from "@/components/public/UI/FlechasSwiper.vue";
 import Section from "@/components/public/UI/Section.vue";
-import CartSlide from "@/components/public/Cart/CartSlide.vue";
-import CartService from "@/components/public/Cart/CartService.vue";
+import CarSlide from "@/components/public/Car/CarSlide.vue";
+import TagService from "@/components/public/Car/TagService.vue";
+import CarService from "@/components/public/Car/CarService.vue";
 
-import { servicesRide } from "@/helpers/tags";
+import { servicesRide, services } from "@/data/index";
 </script>
 <template>
   <Header />
@@ -53,7 +54,7 @@ import { servicesRide } from "@/helpers/tags";
     </div>
 
     <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-      <CartCard v-for="cart in 4" :key="cart" />
+      <CarCard v-for="Car in 4" :key="Car" />
     </div>
   </main>
 
@@ -74,11 +75,11 @@ import { servicesRide } from "@/helpers/tags";
       }"
       :breakpoints="{ 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } }"
     >
-      <swiper-slide><CartBrandsCard /></swiper-slide>
-      <swiper-slide><CartBrandsCard /></swiper-slide>
-      <swiper-slide><CartBrandsCard /></swiper-slide>
-      <swiper-slide><CartBrandsCard /></swiper-slide>
-      <swiper-slide><CartBrandsCard /></swiper-slide>
+      <swiper-slide><CarBrandsCard /></swiper-slide>
+      <swiper-slide><CarBrandsCard /></swiper-slide>
+      <swiper-slide><CarBrandsCard /></swiper-slide>
+      <swiper-slide><CarBrandsCard /></swiper-slide>
+      <swiper-slide><CarBrandsCard /></swiper-slide>
     </swiper-container>
     <div class="btns-swiper flex justify-center items-center gap-10 mt-8">
       <FlechasSwiper classSig="btn-sig" classPrev="btn-ant" />
@@ -99,16 +100,16 @@ import { servicesRide } from "@/helpers/tags";
         }"
       >
         <swiper-slide lazy="true">
-          <CartSlide :imagen="'/imagenes/vehicle.png'" />
+          <CarSlide :imagen="'/imagenes/vehicle.png'" />
         </swiper-slide>
         <swiper-slide lazy="true">
-          <CartSlide :imagen="'/imagenes/vehicle-02.png'" />
+          <CarSlide :imagen="'/imagenes/vehicle-02.png'" />
         </swiper-slide>
         <swiper-slide lazy="true">
-          <CartSlide :imagen="'/imagenes/vehicle.png'" />
+          <CarSlide :imagen="'/imagenes/vehicle.png'" />
         </swiper-slide>
         <swiper-slide lazy="true">
-          <CartSlide :imagen="'/imagenes/vehicle-02.png'" />
+          <CarSlide :imagen="'/imagenes/vehicle-02.png'" />
         </swiper-slide>
       </swiper-container>
 
@@ -125,7 +126,7 @@ import { servicesRide } from "@/helpers/tags";
     >
   </Section>
 
-  <Section class="w-[95%]">
+  <Section class="w-[95%]" id="services">
     <TitleSection
       :spanText="'Expert Car Care'"
       :headingText="'Reliable Service For Every Ride'"
@@ -133,7 +134,7 @@ import { servicesRide } from "@/helpers/tags";
     />
 
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mt-10 mx-auto">
-      <CartService
+      <TagService
         v-for="service in servicesRide"
         :key="service.tag"
         :service="service"
@@ -141,13 +142,41 @@ import { servicesRide } from "@/helpers/tags";
     </div>
   </Section>
 
-  <Section class="w-full bg-slate-900 p-10">
-<TitleSection
+  <Section class="w-full bg-slate-900 px-10 relative py-30">
+    <TitleSection
       :spanText="'Service We Offer'"
       :headingText="'Discover Your Next Ride'"
       :classes="'items-center text-white'"
     />
-
+    <div class="w-[95%] lg:w-[80%] mx-auto mt-10">
+      <swiper-container
+        class="mt-5"
+        slides-per-view="1"
+        loop="true"
+        space-between="25"
+        :autoplay="{ delay: 3000, disableOnInteraction: false }"
+        :navigation="{
+          nextEl: '.services-sig',
+          prevEl: '.services-ant',
+        }"
+        :breakpoints="{ 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } }"
+      >
+        <swiper-slide v-for="service in services" :key="service.tag">
+          <CarService :service="service" />
+        </swiper-slide>
+      </swiper-container>
+      <div
+        class="flex lg:absolute mt-7 gap-10 justify-center w-full lg:justify-between lg:items-center lg:inset-x-0 lg:top-1/2 lg:-translate-y-1/2 lg:px-20"
+      >
+        <FlechasSwiper
+          classSig="services-sig"
+          classPrev="services-ant"
+          borderColor="border-white"
+          hoverColor="bg-transparent"
+          svgColor="#FFF"
+        />
+      </div>
+    </div>
   </Section>
 
   <Footer />

@@ -49,4 +49,4 @@ const servicesRide = [
   },
 ];
 
-export { servicesRide };
+export default servicesRide;
