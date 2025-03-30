@@ -1,4 +1,5 @@
 import services from "./services";
 import servicesRide from "./servicesRide";
+import vehiclesBrand from "./vehiclesBrands";
 
-export { servicesRide, services };
+export { servicesRide, services, vehiclesBrand };

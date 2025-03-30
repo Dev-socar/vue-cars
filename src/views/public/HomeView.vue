@@ -8,13 +8,13 @@ import FlechasSwiper from "@/components/public/UI/FlechasSwiper.vue";
 import Section from "@/components/public/UI/Section.vue";
 import CarSlide from "@/components/public/Car/CarSlide.vue";
 import TagService from "@/components/public/Car/TagService.vue";
-import CarService from "@/components/public/Car/CarService.vue";
+import ServiceCard from "@/components/public/Car/ServiceCard.vue";
 
-import { servicesRide, services } from "@/data/index";
+import { servicesRide, services, vehiclesBrand } from "@/data/index";
 </script>
 <template>
   <Header />
-  <main class="w-[95%] mt-20 lg:mt-50 mx-auto relative" id="vehicles">
+  <main class="w-[95%] lg:w-[80%] mt-20 lg:mt-50 mx-auto relative" id="vehicles">
     <div
       class="flex flex-col items-center gap-5 lg:flex-row lg:gap-0 lg:justify-between lg:items-center"
     >
@@ -23,7 +23,6 @@ import { servicesRide, services } from "@/data/index";
         :headingText="'Browse Our Rental Cars'"
         :classes="'items-center lg:items-start'"
       />
-
       <div>
         <div
           class="flex gap-5 flex-wrap justify-center items-center border-gray-300 border-b-1 pb-2"
@@ -53,36 +52,23 @@ import { servicesRide, services } from "@/data/index";
       </div>
     </div>
 
-    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
       <CarCard v-for="Car in 4" :key="Car" />
     </div>
   </main>
 
-  <Section class="w-[95%]">
+  <Section class="w-[95%] lg:w-[80%]">
     <TitleSection
       :spanText="'Explore By Brand'"
       :headingText="'Our Highlighted Vehicles'"
       :classes="'items-center'"
     />
-    <swiper-container
-      class="mt-5"
-      slides-per-view="1"
-      loop="true"
-      space-between="10"
-      :navigation="{
-        nextEl: '.btn-sig',
-        prevEl: '.btn-ant',
-      }"
-      :breakpoints="{ 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } }"
-    >
-      <swiper-slide><CarBrandsCard /></swiper-slide>
-      <swiper-slide><CarBrandsCard /></swiper-slide>
-      <swiper-slide><CarBrandsCard /></swiper-slide>
-      <swiper-slide><CarBrandsCard /></swiper-slide>
-      <swiper-slide><CarBrandsCard /></swiper-slide>
-    </swiper-container>
-    <div class="btns-swiper flex justify-center items-center gap-10 mt-8">
-      <FlechasSwiper classSig="btn-sig" classPrev="btn-ant" />
+    <div class="py-10 grid md:grid-cols-2 gap-10 lg:grid-cols-5">
+      <CarBrandsCard
+        v-for="brand in vehiclesBrand"
+        :key="brand.tag"
+        :brand="brand"
+      />
     </div>
   </Section>
 
@@ -126,7 +112,7 @@ import { servicesRide, services } from "@/data/index";
     >
   </Section>
 
-  <Section class="w-[95%]" id="services">
+  <Section class="w-[95%] lg:w-[80%]" id="services">
     <TitleSection
       :spanText="'Expert Car Care'"
       :headingText="'Reliable Service For Every Ride'"
@@ -162,7 +148,7 @@ import { servicesRide, services } from "@/data/index";
         :breakpoints="{ 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } }"
       >
         <swiper-slide v-for="service in services" :key="service.tag">
-          <CarService :service="service" />
+          <ServiceCard :service="service" />
         </swiper-slide>
       </swiper-container>
       <div
