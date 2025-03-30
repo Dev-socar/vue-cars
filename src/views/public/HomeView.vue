@@ -7,6 +7,15 @@ import Footer from "@/components/public/Footer/Footer.vue";
 import FlechasSwiper from "@/components/public/UI/FlechasSwiper.vue";
 import Section from "@/components/public/UI/Section.vue";
 import CartSlide from "@/components/public/Cart/CartSlide.vue";
+import CartService from '@/components/public/Cart/CartService.vue';
+
+
+import { servicesRide } from '@/helpers/tags';
+
+
+
+
+
 </script>
 <template>
   <Header />
@@ -126,8 +135,14 @@ import CartSlide from "@/components/public/Cart/CartSlide.vue";
       :classes="'items-center'"
     />
 
+    <div class="flex flex-wrap gap-10 justify-center items-center mt-10 mx-auto">
+      <CartService 
+      v-for="service in servicesRide" 
+      :key="service.tag"
+      :service="service" 
+      />
+    </div>
 
-    
 
     </Section>
 
