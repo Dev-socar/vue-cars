@@ -8,13 +8,13 @@ const { toggleDrawer, drawer } = useMenuHamburger();
 
 <template>
   <nav
-    class="absolute top-0 left-0 right-0 z-20 pt-6 px-6 flex justify-between items-center"
+    class="absolute top-0 left-0 right-0 z-20 lg:z-50 pt-6 px-6 flex justify-between items-center"
   >
-    <button @click="toggleDrawer" class="block lg:hidden text-black">
+    <button @click="toggleDrawer" class="lg:hidden size-12 cursor-pointer">
       <img :src="menuBurgerIcon" class="size-12" alt="Icono svg" />
     </button>
 
-    <h1 class="text-white text-h4 font-bold">
+    <h1 class="text-white text-4xl font-bold">
       <RouterLink :to="{ name: 'home' }">Vue Cars</RouterLink>
     </h1>
 

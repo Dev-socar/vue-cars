@@ -15,7 +15,7 @@ defineProps({
   >
     <div class="absolute top-0 left-0 w-[90%] h-full bg-black p-4">
       <div class="flex flex-col gap-10 mt-15 w-[80%] mx-auto">
-        <button @click.stop="toggleDrawer" class="self-end">
+        <button @click.stop="toggleDrawer" class="self-end cursor-pointer">
           <img
             :src="menuBurgerCloseIcon"
             class="size-12 self-end"
@@ -24,27 +24,27 @@ defineProps({
         </button>
         <RouterLink
           to="/#vehicles"
-          class="text-2xl uppercase hover:text-blue-200 transition-colors duration-300 ease-in"
+          class="text-2xl text-white uppercase hover:text-blue-500 transition-colors duration-300 ease-in"
           >Vehicles</RouterLink
         >
         <RouterLink
           to="/#services"
-          class="text-2xl uppercase hover:text-blue-200 transition-colors duration-300 ease-in"
+          class="text-2xl text-white uppercase hover:text-blue-500 transition-colors duration-300 ease-in"
           >Services</RouterLink
         >
         <RouterLink
           to="/#plans"
-          class="text-2xl uppercase hover:text-blue-200 transition-colors duration-300 ease-in"
+          class="text-2xl text-white uppercase hover:text-blue-500 transition-colors duration-300 ease-in"
           >Plans</RouterLink
         >
         <RouterLink
           to="/#comments"
-          class="text-2xl uppercase hover:text-blue-200 transition-colors duration-300 ease-in"
+          class="text-2xl text-white uppercase hover:text-blue-500 transition-colors duration-300 ease-in"
           >Comments</RouterLink
         >
         <RouterLink
           to="/#contact"
-          class="text-2xl uppercase hover:text-blue-200 transition-colors duration-300 ease-in"
+          class="text-2xl text-white uppercase hover:text-blue-500 transition-colors duration-300 ease-in"
           >Contact</RouterLink
         >
       </div>

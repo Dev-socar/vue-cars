@@ -10,7 +10,7 @@ defineProps({
 <template>
   <RouterLink
     :to="url"
-    class="text-sm sm:text-base md:text-lg lg:text-xl text-white cursor-pointer"
+    class="text-sm sm:text-base md:text-lg lg:text-xl text-white hover:cursor-pointer"
     >{{ texto }}</RouterLink
   >
 </template>
