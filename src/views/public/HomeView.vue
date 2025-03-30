@@ -1,21 +1,38 @@
 <script setup>
+// Librerías de Vue
+import { ref } from "vue";
+
+// Datos
+import { servicesRide, services, vehiclesBrand } from "@/data/index";
+
+// Componentes UI
 import TitleSection from "@/components/public/UI/TitleSection.vue";
+import Section from "@/components/public/UI/Section.vue";
+import FlechasSwiper from "@/components/public/UI/FlechasSwiper.vue";
+
+// Componentes de Vehículos
 import CarCard from "@/components/public/Car/CarCard.vue";
 import CarBrandsCard from "@/components/public/Car/CarBrandsCard.vue";
-import FlechasSwiper from "@/components/public/UI/FlechasSwiper.vue";
-import Section from "@/components/public/UI/Section.vue";
 import CarSlide from "@/components/public/Car/CarSlide.vue";
 import TagService from "@/components/public/Car/TagService.vue";
 import ServiceCard from "@/components/public/Car/ServiceCard.vue";
-import PublicLayout from "@/layouts/PublicLayout.vue";
 
-import { servicesRide, services, vehiclesBrand } from "@/data/index";
+// Componentes de Planes
+import PlanCard from "@/components/public/Plans/PlanCard.vue";
 
+// Layouts
+import PublicLayout from "@/layouts/LayoutPublic.vue";
+
+// Variables reactivas
+const activeTab = ref("monthly");
 </script>
 
 <template>
   <PublicLayout>
-    <main class="w-[95%] lg:w-[80%] mt-20 lg:mt-50 mx-auto relative" id="vehicles">
+    <main
+      class="w-[95%] lg:w-[80%] mt-20 lg:mt-50 mx-auto relative"
+      id="vehicles"
+    >
       <div
         class="flex flex-col items-center gap-5 lg:flex-row lg:gap-0 lg:justify-between lg:items-center"
       >
@@ -146,7 +163,10 @@ import { servicesRide, services, vehiclesBrand } from "@/data/index";
             nextEl: '.services-sig',
             prevEl: '.services-ant',
           }"
-          :breakpoints="{ 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } }"
+          :breakpoints="{
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+          }"
         >
           <swiper-slide v-for="service in services" :key="service.tag">
             <ServiceCard :service="service" />
@@ -164,6 +184,46 @@ import { servicesRide, services, vehiclesBrand } from "@/data/index";
           />
         </div>
       </div>
+    </Section>
+
+    <Section class="w-[95%] lg:w-[80%]" id="plans">
+      <TitleSection
+        :spanText="'Simple Pricing, No Surprises'"
+        :headingText="'Choose Your Plan, Choose Your Future'"
+        :classes="'items-center'"
+      />
+      
+        <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-8">
+          Choose Your Plan
+        </h2>
+        <div class="flex justify-center mb-12">
+          <div class="inline-flex shadow-sm bg-white p-1 rounded-full">
+            <button
+              @click="activeTab = 'monthly'"
+              :class="[
+                'px-10 py-5 text-sm font-medium rounded-full transition-all duration-200 cursor-pointer',
+                activeTab === 'monthly'
+                  ? 'bg-blue-500 text-white shadow-md'
+                  : 'text-gray-700',
+              ]"
+            >
+              Planes Mensuales
+            </button>
+            <button
+              @click="activeTab = 'annual'"
+              :class="[
+                'px-10 py-5 text-sm font-medium rounded-full transition-all duration-200 cursor-pointer',
+                activeTab === 'annual'
+                  ? 'bg-blue-500 text-white shadow-md'
+                  : 'text-gray-700',
+              ]"
+            >
+              Planes Anuales
+            </button>
+          </div>
+        </div>
+        <PlanCard :activeTab="activeTab" />
+      
     </Section>
   </PublicLayout>
 </template>
