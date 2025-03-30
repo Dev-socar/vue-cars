@@ -7,15 +7,9 @@ import Footer from "@/components/public/Footer/Footer.vue";
 import FlechasSwiper from "@/components/public/UI/FlechasSwiper.vue";
 import Section from "@/components/public/UI/Section.vue";
 import CartSlide from "@/components/public/Cart/CartSlide.vue";
-import CartService from '@/components/public/Cart/CartService.vue';
+import CartService from "@/components/public/Cart/CartService.vue";
 
-
-import { servicesRide } from '@/helpers/tags';
-
-
-
-
-
+import { servicesRide } from "@/helpers/tags";
 </script>
 <template>
   <Header />
@@ -71,7 +65,7 @@ import { servicesRide } from '@/helpers/tags';
     />
     <swiper-container
       class="mt-5"
-      slides-per-view="2"
+      slides-per-view="1"
       loop="true"
       space-between="10"
       :navigation="{
@@ -91,8 +85,8 @@ import { servicesRide } from '@/helpers/tags';
     </div>
   </Section>
 
-  <Section :class="`bg-gray-200 lg:p-10 w-[95%] lg:w-full `">
-    <div class="w-[95%] bg-white rounded-b-sm mx-auto relative">
+  <Section :class="` bg-gray-200 pb-10 lg:p-10 w-[95%] lg:w-full `">
+    <div class="w-[95%] bg-white pb-30 lg:pb-0 rounded-b-sm mx-auto relative">
       <swiper-container
         class="mt-5 p-10"
         slides-per-view="1"
@@ -118,34 +112,43 @@ import { servicesRide } from '@/helpers/tags';
         </swiper-slide>
       </swiper-container>
 
-      <!-- Botones de navegación alineados verticalmente -->
       <div
-        class="flex justify-end gap-10 pr-5 lg:w-1/6 absolute bottom-1/14 right-0 -translate-y-1/2 z-10"
+        class="flex justify-end gap-10 absolute left-1/2 -translate-x-1/2 lg:left-auto lg:right-0 lg:translate-x-0 lg:w-1/6 lg:pr-5 lg:bottom-1/14 lg:-translate-y-1/2 z-10"
       >
         <FlechasSwiper classSig="btn-sig-2" classPrev="btn-ant-2" />
       </div>
     </div>
-    <a class="block w-max mt-10 mx-auto py-4 px-8 rounded-full bg-blue-600 hover:bg-black transition-colors ease-in duration-200 text-white text-lg text-center capitalize" href="#">Explore all avaible cars</a>
+    <a
+      class="block w-max mt-10 mx-auto py-4 px-8 rounded-full bg-blue-600 hover:bg-black transition-colors ease-in duration-200 text-white text-lg text-center capitalize"
+      href="#"
+      >Explore all avaible cars</a
+    >
   </Section>
 
- <Section class="w-[95%]">
+  <Section class="w-[95%]">
     <TitleSection
       :spanText="'Expert Car Care'"
       :headingText="'Reliable Service For Every Ride'"
-      :classes="'items-center'"
+      :classes="'items-center text-center lg:text-left'"
     />
 
-    <div class="flex flex-wrap gap-10 justify-center items-center mt-10 mx-auto">
-      <CartService 
-      v-for="service in servicesRide" 
-      :key="service.tag"
-      :service="service" 
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mt-10 mx-auto">
+      <CartService
+        v-for="service in servicesRide"
+        :key="service.tag"
+        :service="service"
       />
     </div>
+  </Section>
 
+  <Section class="w-full bg-slate-900 p-10">
+<TitleSection
+      :spanText="'Service We Offer'"
+      :headingText="'Discover Your Next Ride'"
+      :classes="'items-center text-white'"
+    />
 
-    </Section>
-
+  </Section>
 
   <Footer />
 </template>

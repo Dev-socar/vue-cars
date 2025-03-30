@@ -1,5 +1,3 @@
-
-
 const servicesRide = [
   {
     tag: "service-reponse-time",

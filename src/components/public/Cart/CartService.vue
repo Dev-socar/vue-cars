@@ -18,7 +18,7 @@ const iconMap = {
 
 <template>
   <div
-    class="border-1 border-gray-300 p-5 rounded-lg w-1/5 flex items-center justify-evenly group hover:bg-gray-100 transition-colors ease-in duration-200"
+    class="border-1 border-gray-300 p-5 rounded-lg flex items-center justify-evenly group hover:bg-gray-100 transition-colors ease-in duration-200"
   >
     <div
       class="bg-gray-100 size-[100px] rounded-lg flex justify-center items-center group-hover:bg-gray-200 transition-colors duration-200 ease-in-out"
