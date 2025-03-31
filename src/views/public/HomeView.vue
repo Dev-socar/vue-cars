@@ -250,7 +250,7 @@ const changeComment = (comment) => {
         />
         <div class="w-full">
           <swiper-container
-            class="mt-15 bg-amber-50"
+            class="mt-15"
             slides-per-view="4"
             loop="true"
             space-between="10"

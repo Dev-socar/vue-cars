@@ -19,7 +19,7 @@ defineProps({
       />
     </div>
     <div class="flex flex-col items-start space-y-2">
-      <h3 class="text-3xl">{{comment.name}}</h3>
+      <h3 class="text-2xl">{{comment.name}}</h3>
       <p class="text-sm">{{ comment.username }}</p>
     </div>
   </button>
