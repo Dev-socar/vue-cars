@@ -1,5 +1,6 @@
+import comments from "./comments";
 import services from "./services";
 import servicesRide from "./servicesRide";
 import vehiclesBrand from "./vehiclesBrands";
 
-export { servicesRide, services, vehiclesBrand };
+export { servicesRide, services, vehiclesBrand, comments };

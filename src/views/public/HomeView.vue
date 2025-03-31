@@ -3,7 +3,7 @@
 import { ref } from "vue";
 
 // Datos
-import { servicesRide, services, vehiclesBrand } from "@/data/index";
+import { servicesRide, services, vehiclesBrand, comments } from "@/data/index";
 
 // Componentes UI
 import TitleSection from "@/components/public/UI/TitleSection.vue";
@@ -20,11 +20,27 @@ import ServiceCard from "@/components/public/Car/ServiceCard.vue";
 // Componentes de Planes
 import PlanCard from "@/components/public/Plans/PlanCard.vue";
 
+// Componentes de Comentarios
+import ProfilePill from "@/components/public/Comments/ProfilePill.vue";
+import CommentCard from "@/components/public/Comments/CommentCard.vue";
+
 // Layouts
 import PublicLayout from "@/layouts/LayoutPublic.vue";
 
 // Variables reactivas
 const activeTab = ref("monthly");
+const selectedComment = ref(comments.length > 0 ? comments[0] : null);
+
+const isChangingComment = ref(false);
+
+const changeComment = (comment) => {
+  isChangingComment.value = true;
+  setTimeout(() => {
+    selectedComment.value = comment;
+    isChangingComment.value = false;
+  }, 150); // Ajusta este tiempo para que coincida con la duración de tu transición
+};
+
 </script>
 
 <template>
@@ -90,7 +106,7 @@ const activeTab = ref("monthly");
       </div>
     </Section>
 
-    <Section :class="` bg-gray-200 pb-10 lg:p-10 w-[95%] lg:w-full `">
+    <Section :class="` bg-gray-100 pb-10 lg:p-10 w-[95%] lg:w-full `">
       <div class="w-[95%] bg-white pb-30 lg:pb-0 rounded-b-sm mx-auto relative">
         <swiper-container
           class="mt-5 p-10"
@@ -192,38 +208,95 @@ const activeTab = ref("monthly");
         :headingText="'Choose Your Plan, Choose Your Future'"
         :classes="'items-center'"
       />
-      
-        <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-8">
-          Choose Your Plan
-        </h2>
-        <div class="flex justify-center mb-12">
-          <div class="inline-flex shadow-sm bg-white p-1 rounded-full">
-            <button
-              @click="activeTab = 'monthly'"
-              :class="[
-                'px-10 py-5 text-sm font-medium rounded-full transition-all duration-200 cursor-pointer',
-                activeTab === 'monthly'
-                  ? 'bg-blue-500 text-white shadow-md'
-                  : 'text-gray-700',
-              ]"
-            >
-              Planes Mensuales
-            </button>
-            <button
-              @click="activeTab = 'annual'"
-              :class="[
-                'px-10 py-5 text-sm font-medium rounded-full transition-all duration-200 cursor-pointer',
-                activeTab === 'annual'
-                  ? 'bg-blue-500 text-white shadow-md'
-                  : 'text-gray-700',
-              ]"
-            >
-              Planes Anuales
-            </button>
-          </div>
+
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-8">
+        Choose Your Plan
+      </h2>
+      <div class="flex justify-center mb-12">
+        <div class="inline-flex shadow-sm bg-white p-1 rounded-full">
+          <button
+            @click="activeTab = 'monthly'"
+            :class="[
+              'px-10 py-5 text-sm font-medium rounded-full transition-all duration-200 cursor-pointer',
+              activeTab === 'monthly'
+                ? 'bg-blue-500 text-white shadow-md'
+                : 'text-gray-700',
+            ]"
+          >
+            Planes Mensuales
+          </button>
+          <button
+            @click="activeTab = 'annual'"
+            :class="[
+              'px-10 py-5 text-sm font-medium rounded-full transition-all duration-200 cursor-pointer',
+              activeTab === 'annual'
+                ? 'bg-blue-500 text-white shadow-md'
+                : 'text-gray-700',
+            ]"
+          >
+            Planes Anuales
+          </button>
         </div>
-        <PlanCard :activeTab="activeTab" />
-      
+      </div>
+      <PlanCard :activeTab="activeTab" />
+    </Section>
+
+    <Section :class="` bg-gray-100 pb-10 lg:p-10 w-[95%] lg:w-full `">
+      <div class="w-[95%] lg:w-[80%] mx-auto">
+        <TitleSection
+          :spanText="'Your Satisfaction, Our Success'"
+          :headingText="'What Our Customers Are Saying'"
+          :classes="'items-center'"
+        />
+        <div class="w-full">
+          <swiper-container
+            class="mt-15 bg-amber-50"
+            slides-per-view="4"
+            loop="true"
+            space-between="10"
+            :breakpoints="{
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 4 },
+            }"
+          >
+            <swiper-slide
+              v-for="comment in comments"
+              :key="comment.id"
+              @click="selectedComment = comment"
+            >
+              <ProfilePill
+                :comment="comment"
+                :class="{
+                  'bg-blue-600 text-white': selectedComment?.id === comment.id,
+                  'bg-black text-white': selectedComment?.id !== comment.id,
+                }"
+              />
+            </swiper-slide>
+          </swiper-container>
+
+          <Transition name="fade" mode="out-in">
+            <CommentCard
+              v-if="selectedComment && !isChangingComment"
+              :key="selectedComment.id"
+              :comment="selectedComment"
+            />
+          </Transition>
+        </div>
+      </div>
     </Section>
   </PublicLayout>
 </template>
+
+
+<style scoped>
+/* Estilos para la transición de fade */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
